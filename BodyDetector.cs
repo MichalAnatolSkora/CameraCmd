@@ -7,7 +7,7 @@ namespace CameraCmd
 {
     public class BodyDetector
     {
-        private CascadeClassifier cascade => new CascadeClassifier(@"C:\p\opencv\data\haarcascades\haarcascade_fullbody.xml");
+        private CascadeClassifier cascade => new CascadeClassifier(@".\CascadeClassifiers\haarcascade_fullbody.xml");
         public void Detect(Mat frame)
         {
             var grayImage = new Mat();

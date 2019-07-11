@@ -44,8 +44,8 @@ namespace CameraCmd
                         Cv2.CvtColor(mat3, grayImage, ColorConversionCodes.BGRA2GRAY);
                         Cv2.EqualizeHist(grayImage, grayImage);
 
-                        var cascade = new CascadeClassifier(@"C:\p\opencv\data\haarcascades\haarcascade_frontalface_alt.xml");
-                        var nestedCascade = new CascadeClassifier(@"C:\p\opencv\data\haarcascades\haarcascade_eye_tree_eyeglasses.xml");
+                        var cascade = new CascadeClassifier(@".\CascadeClassifiers\haarcascade_frontalface_alt2.xml");
+                        var nestedCascade = new CascadeClassifier(@".\CascadeClassifiers\haarcascade_eye_tree_eyeglasses.xml");
 
                         var faces = cascade.DetectMultiScale(
                             image: grayImage,
@@ -59,15 +59,15 @@ namespace CameraCmd
 
                         var srcImage = mat3;
 
-                        new BodyDetector().Detect(mat3);
+                        //new BodyDetector().Detect(mat3);
                         faces.ToList().ForEach(e=>e.Height+=10);
                         foreach (var faceRect in faces)
                         {
                             Cv2.Rectangle(frame, faceRect, Scalar.Red, 2);
-                            var a = new Mat(srcImage, faceRect);
-                            var eigenValues = OutputArray.Create(a);
-                            var eigenVectors = OutputArray.Create(a);
-                            Cv2.Eigen(a, eigenValues, eigenVectors);
+                            //var a = new Mat(srcImage, faceRect);
+                            //var eigenValues = OutputArray.Create(a);
+                            //var eigenVectors = OutputArray.Create(a);
+                            //Cv2.Eigen(a, eigenValues, eigenVectors);
                         }
 
                         Cv2.ImShow("Source", mat3);
