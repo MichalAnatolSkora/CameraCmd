@@ -1,0 +1,67 @@
+Configuration of OpenCVSharp:
+
+
+Przed:
+
+install libgtk2.0-dev and pkg-config
+
+
+
+https://github.com/shimat/opencvsharp/issues/388#issuecomment-338617593
+
+I have taken the following notes while performing the procedure. Use it at your own risk. I tested it on RPI Stretch
+
+OpenCV Installation
+
+apt-get install -y build-essential cmake apt-transport-https
+apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev libtbb-dev libeigen3-dev
+apt-get install -y wget unzip curl nano git
+
+cd ~
+mkdir src
+cd src
+mkdir opencv
+cd opencv
+wget https://github.com/opencv/opencv/archive/3.2.0.zip
+unzip  3.2.0.zip
+rm 3.2.0.zip
+
+wget https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
+unzip 3.2.0.zip
+rm 3.2.0.zip
+cd opencv-3.2.0/
+
+#Build and install OpenCv
+mkdir build
+cd build
+cmake -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.0/modules -D WITH_LIBV4L=ON -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON -D ENABLE_NEON=ON -D WITH_GTK=ON ..
+# LIBV4L - Enabled Video 4 Linux | TBB - Multithreading | NEON - ARM Optimizations
+make
+sudo make install
+sudo ldconfig
+OpenCVSharp Installation
+
+#download OpenCvSharp
+cd ~/src
+git clone https://github.com/shimat/opencvsharp.git
+
+#install the Extern lib.
+cd opencvsharp/src
+sed -i.bak '5i\
+include_directories("/usr/local/include/")\
+set (CMAKE_CXX_STANDARD 11)\
+' CMakeLists.txt
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo ldconfig
+
+
+
+Pozniej: 
+dotnet publish -r linux-arm -o ..\build -p:PublishSingleFile=true
+sudo chmod +x CameraTestRPi1
+sudo ./CameraTestRPi1
+
