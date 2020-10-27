@@ -89,7 +89,7 @@ namespace CameraRpiYolov3_tiny
 
                     //setting blob, size can be:320/416/608
                     //opencv blob setting can check here https://github.com/opencv/opencv/tree/master/samples/dnn#object-detection
-                    var blob = CvDnn.BlobFromImage(org, 1.0 / 255, new Size(416, 416), new Scalar(), true, false);
+                    var blob = CvDnn.BlobFromImage(org, 1.0 / 255, new Size(320, 320), new Scalar(), true, false);
 
                     //input data
                     net.SetInput(blob);
@@ -112,14 +112,14 @@ namespace CameraRpiYolov3_tiny
                     #endregion
 
                     //get result from all output
-                    GetResult(outs, org, threshold, nmsThreshold);
+                    GetResult(outs, org, threshold, nmsThreshold, true);
 
                     //using (new Window("died.tw", org))
                     //{
                     //    Cv2.WaitKey();
                     //}
                     window.ShowImage(org);
-                    Cv2.WaitKey(10);
+                    Cv2.WaitKey(sleepTime);
                 }
             }
         }
