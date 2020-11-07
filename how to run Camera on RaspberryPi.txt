@@ -65,3 +65,6 @@ dotnet publish -r linux-arm -o ..\build -p:PublishSingleFile=true
 sudo chmod +x CameraTestRPi1
 sudo ./CameraTestRPi1
 
+Do zainstalowania na Jetson Nano:
+sudo apt-get install lib32stdc++6
+
