@@ -3,7 +3,7 @@ Configuration of OpenCVSharp:
 
 Przed:
 
-install libgtk2.0-dev and pkg-config
+sudo apt-get install libgtk2.0-dev pkg-config
 
 
 
