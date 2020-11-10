@@ -91,3 +91,6 @@ cmake -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.5.0/modules \
 
 make -j4
 make install
+
+
+ZOBACZYC https://gist.github.com/YashasSamaga/6d37bc403c0934329b078b4bad98c7f2
