@@ -13,9 +13,9 @@ I have taken the following notes while performing the procedure. Use it at your 
 
 OpenCV Installation
 
-apt-get install -y build-essential cmake apt-transport-https
-apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev libtbb-dev libeigen3-dev
-apt-get install -y wget unzip curl nano git
+sudo apt-get install -y build-essential cmake apt-transport-https
+sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev libtbb-dev libeigen3-dev
+sudo apt-get install -y wget unzip curl nano git
 
 cd ~
 mkdir src
