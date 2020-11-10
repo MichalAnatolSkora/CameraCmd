@@ -11,3 +11,4 @@ Console Application
 
 # Links
 https://unosquare.github.io/raspberryio/
+https://maker.pro/nvidia-jetson/tutorial/real-time-face-detection-on-jetson-nano-using-opencv
