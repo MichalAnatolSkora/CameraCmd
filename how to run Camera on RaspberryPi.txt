@@ -113,3 +113,4 @@ make install
 
 
 ZOBACZYC https://gist.github.com/YashasSamaga/6d37bc403c0934329b078b4bad98c7f2
+TRY CUDA 10.2
