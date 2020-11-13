@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="OpenCvSharp4" Version="4.5.0.20201013" />
-    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.5.0.20201013" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.5.0.20201013" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +27,22 @@
     <None Update="Content\yolov4-tiny.weights">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Content\yolov5m.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\yolov5s.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\yolov5s\saved_model.pb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\yolov5s.pt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Content\yolov5s\assets\" />
   </ItemGroup>
 
 </Project>

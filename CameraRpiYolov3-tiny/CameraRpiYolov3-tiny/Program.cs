@@ -56,22 +56,21 @@ namespace CameraRpiYolov3_tiny
             using var capture = new VideoCapture(0);
             int sleepTime = (int)Math.Round(1000 / capture.Fps);
 
-            using (var window = new Window("capture"))
-            {
-                var org = new Mat();
+            Window window = null;
+            var org = new Mat();
 
                 //load model and config, if you got error: "separator_index < line.size()", check your cfg file, must be something wrong.
                 var net = CvDnn.ReadNetFromDarknet(cfg, model);
                 #region set preferable
 
-                net.SetPreferableBackend(Net.Backend.OPENCV);
+                net.SetPreferableBackend(Net.Backend.CUDA);
                 /*
                 0:DNN_BACKEND_DEFAULT 
                 1:DNN_BACKEND_HALIDE 
                 2:DNN_BACKEND_INFERENCE_ENGINE
                 3:DNN_BACKEND_OPENCV 
                  */
-                net.SetPreferableTarget(0);
+                net.SetPreferableTarget(Net.Target.CUDA);
                 /*
                 0:DNN_TARGET_CPU 
                 1:DNN_TARGET_OPENCL
@@ -89,7 +88,7 @@ namespace CameraRpiYolov3_tiny
 
                     //setting blob, size can be:320/416/608
                     //opencv blob setting can check here https://github.com/opencv/opencv/tree/master/samples/dnn#object-detection
-                    var blob = CvDnn.BlobFromImage(org, 1.0 / 255, new Size(320, 320), new Scalar(), true, false);
+                    var blob = CvDnn.BlobFromImage(org, 1.0 / 255, new Size(416, 416), new Scalar(), true, false);
 
                     //input data
                     net.SetInput(blob);
@@ -118,10 +117,12 @@ namespace CameraRpiYolov3_tiny
                     //{
                     //    Cv2.WaitKey();
                     //}
-                    window.ShowImage(org);
+
+                    Console.WriteLine("Saved: " + org.SaveImage("1.jpg"));
+
+                    (window ??= new Window("capture", WindowMode.AutoSize)).ShowImage(org);
                     Cv2.WaitKey(sleepTime);
                 }
-            }
         }
 
         /// <summary>
