@@ -144,7 +144,14 @@ namespace CameraRpiYolov3_tiny
 
             using var writer = new VideoWriter("out.avi", FourCC.MJPG, framesPerSecond, new Size(capture.FrameWidth, capture.FrameHeight));
 
+            Stopwatch sw2 = new Stopwatch();
+            sw2.Start();
+
             frames.ForEach(e => writer.Write(e));
+
+            sw2.Stop();
+            Console.WriteLine($"File save in :{sw2.ElapsedMilliseconds} ms");
+            Console.ReadKey();
         }
 
         /// <summary>
