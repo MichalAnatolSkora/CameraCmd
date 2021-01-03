@@ -56,11 +56,9 @@ namespace CameraRpiYolov3_tiny
             #endregion
 
             using var capture = new VideoCapture(0);
-            using var writer = new VideoWriter("out.avi", FourCC.MJPG, capture.Fps, new Size(capture.FrameWidth, capture.FrameHeight));
-            int sleepTime = (int) Math.Round(1000 / capture.Fps);
 
             Window window = null;
-            var org = new Mat();
+            //var org = new Mat();
 
             //load model and config, if you got error: "separator_index < line.size()", check your cfg file, must be something wrong.
             var net = CvDnn.ReadNetFromDarknet(cfg, model);
@@ -85,10 +83,14 @@ namespace CameraRpiYolov3_tiny
 
             #endregion
 
+            var frames = new List<Mat>();
+            
             var dateTime = DateTime.Now;
+            DateTime? dateTimeFinish = null;
 
             while (true)
             {
+                var org = new Mat();
                 //get image
                 capture.Read(org);
 
@@ -128,15 +130,21 @@ namespace CameraRpiYolov3_tiny
 
                 (window ??= new Window("capture", WindowMode.AutoSize)).ShowImage(org);
 
-                writer.Write(org);
-                
-                Cv2.WaitKey(sleepTime);
+                frames.Add(org);
 
-                if (dateTime.AddMinutes(1) < DateTime.Now)
+                if (dateTime.AddMinutes(1) < (dateTimeFinish = DateTime.Now))
                 {
                     break;
                 }
             }
+
+            var timeFinish = dateTimeFinish - dateTime;
+
+            var framesPerSecond = frames.Count / timeFinish.Value.TotalSeconds;
+
+            using var writer = new VideoWriter("out.avi", FourCC.MJPG, framesPerSecond, new Size(capture.FrameWidth, capture.FrameHeight));
+
+            frames.ForEach(e => writer.Write(e));
         }
 
         /// <summary>
